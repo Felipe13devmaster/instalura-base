@@ -9,5 +9,5 @@ function Texto(props) {//componente react
 }
 
 export default function Home() {
-  return <div><Title>My page</Title><Texto>Props aqui</Texto></div>
+  return <div><Title>My page</Title><Texto>Props aqui, isso é um teste</Texto></div>
 }
