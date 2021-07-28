@@ -1,13 +1,9 @@
-import styled from 'styled-components'
-
-const Title = styled.h1`
-  font-size: 50px;
-  color: ${({ theme }) => theme.colors.primary};
-`
-function Texto(props) {//componente react
-  return <p>{props.children}</p>
-}
+import Menu from '../src/components/commons/Menu';
 
 export default function Home() {
-  return <div><Title>My page</Title><Texto>Props aqui, isso é um teste</Texto></div>
+  return (//os parenteses aqui são opcionais, é so pra ficar mais organizado
+    <div>
+      <Menu></Menu>
+    </div>
+  )
 }
