@@ -2,6 +2,7 @@ import React from 'react';
 import { MenuStyle } from './styles/MenuStyle';
 import { Logo } from '../../../theme/Logotipo/Logo';
 import { Button } from '../Button';
+import Text from '../../foundation/Text';
 
 export default function Menu() {
     const links = [
@@ -28,11 +29,11 @@ export default function Menu() {
             {links.map((link) => {//Sempre que for array(lista) tem que passar uma key unica nos itens
                 return (
                     <li key={link.url}>
-                       <a href={link.url}>
+                       <Text variant='smallestException' tag='a' href={link.url}>
                             {link.texto}
-                        </a> 
+                        </Text> 
                     </li>
-                )
+                );
             })}
         </MenuStyle.LadoCentral>
         <MenuStyle.LadoDireito>
