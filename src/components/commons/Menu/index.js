@@ -1,8 +1,9 @@
 import React from 'react';
 import { MenuStyle } from './styles/MenuStyle';
 import { Logo } from '../../../theme/Logotipo/Logo';
+import { Button } from '../Button';
 
-export default function Menu(props) {
+export default function Menu() {
     const links = [
         {
             texto: 'Home',
@@ -24,9 +25,9 @@ export default function Menu(props) {
             <Logo></Logo>
         </MenuStyle.LadoEsquerdo>
         <MenuStyle.LadoCentral>
-            {links.map((link) => {
+            {links.map((link) => {//Sempre que for array(lista) tem que passar uma key unica nos itens
                 return (
-                    <li>
+                    <li key={link.url}>
                        <a href={link.url}>
                             {link.texto}
                         </a> 
@@ -35,13 +36,14 @@ export default function Menu(props) {
             })}
         </MenuStyle.LadoCentral>
         <MenuStyle.LadoDireito>
-            <button>
+            <Button variant='secondary.main' ghost>
                 Entrar
-            </button>
-            <button>
+            </Button>
+            <Button variant='primary.main'>
                 Cadastrar
-            </button>
+            </Button>
             </MenuStyle.LadoDireito>
       </MenuStyle>
-    )
+    );
   }
+  //OBS:variante === classe css analogamente
