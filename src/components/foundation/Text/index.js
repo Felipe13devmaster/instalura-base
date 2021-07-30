@@ -1,5 +1,6 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
+import { convertPropsToStyle } from '../../../theme/utils/convertPropsToStyle';
 
 export const TextStyleVariantsMap = {
     paragraph1: css`
@@ -16,13 +17,15 @@ export const TextStyleVariantsMap = {
 
 const TextBase = styled.span`
     ${(props) => TextStyleVariantsMap[props.variant]}
+    ${convertPropsToStyle('textAlign')}
 `;//aqui é span pq é a mais generica dentre as tags de texto citadas aqui
 
-export default function Text({ tag, variant, children }) {//deve suportar as tags de texto p, h"s e span
+export default function Text({ tag, variant, children, ...props }) {//deve suportar as tags de texto p, h"s e span
     return (
         <TextBase
             as={tag}
             variant={variant}
+            {...props}
         >
             {children}
         </TextBase>

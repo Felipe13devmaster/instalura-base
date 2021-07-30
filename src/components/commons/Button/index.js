@@ -2,6 +2,7 @@ import styled, { css } from "styled-components";
 import get from "lodash/get";
 import { TextStyleVariantsMap } from "../../foundation/Text";
 import { breakpointsMedia } from "../../../theme/utils/breakpointsMedia";
+import { convertPropsToStyle } from '../../../theme/utils/convertPropsToStyle';
 
 const ButtonGhost = css`
     background-color: transparent;
@@ -20,6 +21,14 @@ export const Button = styled.button`
     font-weight: bold;
     opacity: 1;
     border-radius: 8px;
+    
+    ${(props) => props.ghost ? ButtonGhost : ButtonDefault}
+    transition: opacity ${({ theme }) => theme.transition};
+    border-radius: ${(props) => props.theme.borderRadius};
+    &:hover,
+    &:focus {
+        opacity: .5;
+    }
 
     ${breakpointsMedia({
         xs: css`
@@ -30,12 +39,8 @@ export const Button = styled.button`
         `
     })}
 
-    ${(props) => props.ghost ? ButtonGhost : ButtonDefault}
-    transition: opacity ${({ theme }) => theme.transition};
-    border-radius: ${(props) => props.theme.borderRadius};
-    &:hover,
-    &:focus {
-        opacity: .5;
-    }
+    ${convertPropsToStyle('margin')}
+    ${convertPropsToStyle('display')}
+
 `;
 //linha 22 equivale a linha 23....linha 22 esta desistruturada.
