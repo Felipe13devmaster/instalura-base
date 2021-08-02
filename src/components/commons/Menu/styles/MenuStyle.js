@@ -1,8 +1,8 @@
 import styled, { css } from 'styled-components';
-import { breakpointsMedia } from '../../../../theme/utils/breakpointsMedia';
+import breakpointsMedia from '../../../../theme/utils/breakpointsMedia';
 import { TextStyleVariantsMap } from '../../../foundation/Text';
 
-export const MenuStyle = styled.nav`
+const MenuStyle = styled.nav`
   font-family: 'Rybik', sans-serif;
   display: flex;
   align-items: center;
@@ -13,7 +13,7 @@ export const MenuStyle = styled.nav`
   padding-right: 28px;
 
   ${breakpointsMedia({
-  md: css`
+    md: css`
     justify-content: flex-start;
     margin-top: 32px;
     margin-left: auto;
@@ -22,10 +22,10 @@ export const MenuStyle = styled.nav`
     padding: 0 16px;
     max-width: 768px;
   `,
-  lg: css`
+    lg: css`
     max-width: 1160px; 
   `,
-  xl: css`
+    xl: css`
     max-width: 1222px;
   `,
   })}
@@ -80,13 +80,13 @@ MenuStyle.LadoCentral = styled.div`
     transition: 200ms ease-in-out;
 
     ${breakpointsMedia({
-      xs: css`
+    xs: css`
         ${TextStyleVariantsMap.smallestException}
       `,
-      md: css`
+    md: css`
         ${TextStyleVariantsMap.paragraph1}
       `,
-    })}
+  })}
   
     &:hover,
     &:focus {
@@ -110,3 +110,5 @@ MenuStyle.LadoDireito = styled.div`
     `,
   })}
 `;
+
+export default MenuStyle;

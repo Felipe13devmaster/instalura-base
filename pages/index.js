@@ -1,25 +1,34 @@
+import React from 'react';
 import Menu from '../src/components/commons/Menu';
 import Footer from '../src/components/commons/Footer';
 import Text from '../src/components/foundation/Text';
-import { Button } from '../src/components/commons/Button';
-import { Grid } from '../src/components/foundation/layout/Grid';
+import Button from '../src/components/commons/Button';
+import Grid from '../src/components/foundation/layout/Grid';
+import Box from '../src/components/foundation/layout/Box';
 
 export default function Home() {
-  return (//os parenteses aqui são opcionais, é so pra ficar mais organizado
-    <div style={{//este estilo joga o footer pra baixo
-      flex: '1',
-      display: 'flex',
-      flexWrap: 'wrap',
-      flexDirection: 'column',
-      justifyContent: 'space-between',
-    }}>
-      <Menu></Menu>
+  return (// os parenteses aqui são opcionais, é so pra ficar mais organizado
+    <Box // este estilo joga o footer pra baixo
+      flex="1"
+      display="flex"
+      flexWrap="wrap"
+      flexDirection="column"
+      justifyContent="space-between"
+      backgroundImage="url(/images/bubbles.svg)"
+      backgroundRepeat="no-repeat"
+      backgroundPosition="bottom right"
+    >
+      <Menu />
 
-      <Grid.Container>
+      <Grid.Container marginTop={{ xs: '32px', md: '75px' }}>
         <Grid.Row>
           <Grid.Col
-            offset={1}//desloca a coluna uma casa para a direita
             value={{ xs: 12, md: 5 }}
+            offset={1}// desloca a coluna uma casa para a direita
+            display="flex"
+            alignItems="flex-start"
+            justifyContent="center"
+            flexDirection="column"
           >
             <Text
               variant="title"
@@ -61,6 +70,7 @@ export default function Home() {
             value={{ xs: 12, md: 6 }}
           >
             <img
+              alt="Imagem"
               style={{ display: 'block', margin: 'auto' }}
               src="https://bootcamp-alura-01-git-modulo01.omariosouto.vercel.app/images/phones.png"
             />
@@ -68,7 +78,7 @@ export default function Home() {
         </Grid.Row>
       </Grid.Container>
 
-      <Footer></Footer>
-    </div>
-  )
+      <Footer />
+    </Box>
+  );
 }

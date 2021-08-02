@@ -1,8 +1,8 @@
-import styled, { css } from "styled-components";
-import get from "lodash/get";
-import { TextStyleVariantsMap } from "../../foundation/Text";
-import { breakpointsMedia } from "../../../theme/utils/breakpointsMedia";
-import { convertPropsToStyle } from '../../../theme/utils/convertPropsToStyle';
+import styled, { css } from 'styled-components';
+import get from 'lodash/get';
+import { TextStyleVariantsMap } from '../../foundation/Text';
+import breakpointsMedia from '../../../theme/utils/breakpointsMedia';
+import convertPropsToStyle from '../../../theme/utils/convertPropsToStyle';
 
 const ButtonGhost = css`
     background-color: transparent;
@@ -14,7 +14,7 @@ const ButtonDefault = css`
     color: ${(props) => get(props.theme, `colors.${props.variant}.contrastText`)};
 `;
 
-export const Button = styled.button`
+const Button = styled.button`
     border: 0;
     cursor: pointer;
     padding: 12px 26px;
@@ -22,7 +22,7 @@ export const Button = styled.button`
     opacity: 1;
     border-radius: 8px;
     
-    ${(props) => props.ghost ? ButtonGhost : ButtonDefault}
+    ${(props) => (props.ghost ? ButtonGhost : ButtonDefault)}
     transition: opacity ${({ theme }) => theme.transition};
     border-radius: ${(props) => props.theme.borderRadius};
     &:hover,
@@ -31,16 +31,18 @@ export const Button = styled.button`
     }
 
     ${breakpointsMedia({
-        xs: css`
+    xs: css`
             ${TextStyleVariantsMap.smallestException}
-        `,  
-        md: css`
+        `,
+    md: css`
             ${TextStyleVariantsMap.paragraph1}
-        `
-    })}
+        `,
+  })}
 
     ${convertPropsToStyle('margin')}
     ${convertPropsToStyle('display')}
 
 `;
-//linha 22 equivale a linha 23....linha 22 esta desistruturada.
+// linha 22 equivale a linha 23....linha 22 esta desistruturada.
+
+export default Button;
