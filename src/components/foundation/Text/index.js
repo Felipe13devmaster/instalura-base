@@ -1,5 +1,6 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
+import PropTypes from 'prop-types';
 import convertPropsToStyle from '../../../theme/utils/convertPropsToStyle';
 
 export const TextStyleVariantsMap = {
@@ -28,7 +29,7 @@ export default function Text({
     <TextBase
       as={tag}
       variant={variant}
-            // eslint-disable-next-line react/jsx-props-no-spreading
+      // eslint-disable-next-line react/jsx-props-no-spreading
       {...props}
     >
       {children}
@@ -36,6 +37,12 @@ export default function Text({
   );
 }
 // as da linha 11 converte implicitamente a tag para o elemento quer passado
+
+Text.propTypes = {
+  tag: PropTypes.string, // quando tem valor default n precida do isRequired
+  variant: PropTypes.string,
+  children: PropTypes.node.isRequired,
+};
 
 Text.defaultProps = { // Aqui vc deixa explicito o comportamento caso text não receba tag
   tag: 'span',
