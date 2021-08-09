@@ -5,7 +5,7 @@ import { Logo } from '../../../theme/Logotipo/Logo';
 import Button from '../Button';
 import Text from '../../foundation/Text';
 
-export default function Menu() {
+const Menu = () => {
   const links = [
     {
       texto: 'Home',
@@ -45,5 +45,6 @@ export default function Menu() {
       </MenuStyle.LadoDireito>
     </MenuStyle>
   );
-}
+};
 // OBS:variante === classe css analogamente
+export default Menu;

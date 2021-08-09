@@ -5,9 +5,12 @@ import Text from '../src/components/foundation/Text';
 import Button from '../src/components/commons/Button';
 import Grid from '../src/components/foundation/layout/Grid';
 import Box from '../src/components/foundation/layout/Box';
+import Modal from '../src/components/commons/Modal';
 
-export default function Home() {
-  return (// os parenteses aqui são opcionais, é so pra ficar mais organizado
+const Home = () => { // os parenteses aqui são opcionais, é so pra ficar mais organizado
+  const [isModalOpen, setModalState] = React.useState(false);
+
+  return (
     <Box // este estilo joga o footer pra baixo
       flex="1"
       display="flex"
@@ -18,6 +21,25 @@ export default function Home() {
       backgroundRepeat="no-repeat"
       backgroundPosition="bottom right"
     >
+      {/* isModalOpen && <Modal />  Verdadeiro && <Mostra o que ta aqui /> */}
+      <Modal
+        isOpen={isModalOpen}
+        onClose={() => setModalState(false)}
+      >
+        {(propsDoModal) => (
+          <Box
+            backgroundColor="white"
+            // eslint-disable-next-line max-len
+            // data-modal-safe-area="true" Esta data=attribute sera usada para indicar que tudo o que esta dentro do box não fechara o modal
+            // eslint-disable-next-line react/jsx-props-no-spreading
+            {...propsDoModal}
+          >
+            <div>
+              Conteúdo do Modal
+            </div>
+          </Box>
+        )}
+      </Modal>
       <Menu />
 
       <Grid.Container marginTop={{ xs: '32px', md: '75px' }}>
@@ -61,6 +83,10 @@ export default function Home() {
                 md: 'initial',
               }}
               display="block"
+              onClick={() => {
+                // isModalOpen = true;
+                setModalState(!isModalOpen);
+              }}
             >
               Cadastrar
             </Button>
@@ -81,4 +107,6 @@ export default function Home() {
       <Footer />
     </Box>
   );
-}
+};
+
+export default Home;

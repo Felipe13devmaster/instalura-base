@@ -10,6 +10,7 @@ const Box = styled.div`
   ${convertPropsToStyle('backgroundImage')}
   ${convertPropsToStyle('backgroundRepeat')}
   ${convertPropsToStyle('backgroundPosition')}
+  ${convertPropsToStyle('backgroundColor')}
 `;
 
 export default Box;
