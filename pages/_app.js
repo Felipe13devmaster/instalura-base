@@ -1,10 +1,13 @@
-import { ThemeProvider } from 'styled-components'
+/* eslint-disable react/prop-types */
+/* eslint-disable react/jsx-props-no-spreading */
+import React from 'react';
+import { ThemeProvider } from 'styled-components';
+import Head from 'next/head';
 import theme from '../src/theme';
 import { GlobalStyle } from '../src/theme/GlobalStyle';
-import Head from 'next/head';
 
 export default function App({ Component, pageProps }) {
-  return (//estes links(linhas 10, 11) estão importando as fontes
+  return (// estes links(linhas 10, 11) estão importando as fontes
     <>
       <Head>
         <title>Instalura</title>
@@ -19,5 +22,5 @@ export default function App({ Component, pageProps }) {
         <Component {...pageProps} />
       </ThemeProvider>
     </>
-  )
+  );
 }
