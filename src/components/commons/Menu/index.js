@@ -27,13 +27,13 @@ export default function Menu() {
         <Logo />
       </MenuStyle.LadoEsquerdo>
       <MenuStyle.LadoCentral>
-        {links.map((link) => { // Sempre que for array(lista) tem que passar uma key unica nos itens
+        {links.map((link) => ( // Sempre que for array(lista) tem que passar uma key unica nos itens
           <li key={link.url}>
             <Text variant="smallestException" tag="a" href={link.url}>
               {link.texto}
             </Text>
-          </li>;
-        })}
+          </li>
+        ))}
       </MenuStyle.LadoCentral>
       <MenuStyle.LadoDireito>
         <Button variant="secondary.main" ghost>
