@@ -6,9 +6,10 @@ import Button from '../src/components/commons/Button';
 import Grid from '../src/components/foundation/layout/Grid';
 import Box from '../src/components/foundation/layout/Box';
 import Modal from '../src/components/commons/Modal';
+import FormCadastro from '../src/components/commons/FormCadastro';
 
 const Home = () => { // os parenteses aqui são opcionais, é so pra ficar mais organizado
-  const [isModalOpen, setModalState] = React.useState(false);
+  const [isModalOpen, setModalState] = React.useState(true);
 
   return (
     <Box // este estilo joga o footer pra baixo
@@ -27,17 +28,7 @@ const Home = () => { // os parenteses aqui são opcionais, é so pra ficar mais 
         onClose={() => setModalState(false)}
       >
         {(propsDoModal) => (
-          <Box
-            backgroundColor="white"
-            // eslint-disable-next-line max-len
-            // data-modal-safe-area="true" Esta data=attribute sera usada para indicar que tudo o que esta dentro do box não fechara o modal
-            // eslint-disable-next-line react/jsx-props-no-spreading
-            {...propsDoModal}
-          >
-            <div>
-              Conteúdo do Modal
-            </div>
-          </Box>
+          <FormCadastro propsDoModal={propsDoModal} />
         )}
       </Modal>
       <Menu />

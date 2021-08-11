@@ -9,6 +9,7 @@ const Grid = {
         padding-left: 28px;
         margin-right: auto;
         margin-left: auto;
+        max-width: initial;
         ${breakpointsMedia({
     xs: css`
             max-width: initial;
@@ -38,6 +39,10 @@ const Grid = {
         flex-wrap: wrap;
         margin-right: -16px;
         margin-left: -16px;
+        ${convertPropsToStyle('flex')}
+        ${convertPropsToStyle('marginLeft')}
+        ${convertPropsToStyle('marginRight')}
+        ${convertPropsToStyle('justifyContent')}
       `,
   Col: styled.div`
         padding-right: 16px;
@@ -56,36 +61,46 @@ const Grid = {
     }
 
     return breakpointsMedia({
-      ...(value.xs && {
-        xs: css`
-                        flex: 0 0 ${(100 * value.xs) / 12}%;
-                        max-width: ${(100 * value.xs) / 12}%;
-                    `,
-      }),
-      ...(value.sm && {
-        sm: css`
-                        flex: 0 0 ${(100 * value.sm) / 12}%;
-                        max-width: ${(100 * value.sm) / 12}%;
-                    `,
-      }),
-      ...(value.md && {
-        md: css`
-                        flex: 0 0 ${(100 * value.md) / 12}%;
-                        max-width: ${(100 * value.md) / 12}%;
-                    `,
-      }),
-      ...(value.lg && {
-        lg: css`
-                        flex: 0 0 ${(100 * value.lg) / 12}%;
-                        max-width: ${(100 * value.lg) / 12}%;
-                    `,
-      }),
-      ...(value.xl && {
-        xl: css`
-                        flex: 0 0 ${(100 * value.xl) / 12}%;
-                        max-width: ${(100 * value.xl) / 12}%;
-                    `,
-      }),
+      xs: value?.xs
+        ? css`
+            flex-grow: 0;
+            flex-shrink: 0;
+            flex-basis: ${(100 * value.xs) / 12}%;
+            max-width: ${(100 * value.xs) / 12}%;
+          `
+        : '',
+      sm: value?.sm
+        ? css`
+            flex-grow: 0;
+            flex-shrink: 0;
+            flex-basis: ${(100 * value.sm) / 12}%;
+            max-width: ${(100 * value.sm) / 12}%;
+          `
+        : '',
+      md: value?.md
+        ? css`
+            flex-grow: 0;
+            flex-shrink: 0;
+            flex-basis: ${(100 * value.md) / 12}%;
+            max-width: ${(100 * value.md) / 12}%;
+          `
+        : '',
+      lg: value?.lg
+        ? css`
+            flex-grow: 0;
+            flex-shrink: 0;
+            flex-basis: ${(100 * value.lg) / 12}%;
+            max-width: ${(100 * value.lg) / 12}%;
+          `
+        : '',
+      xl: value?.xl
+        ? css`
+            flex-grow: 0;
+            flex-shrink: 0;
+            flex-basis: ${(100 * value.xl) / 12}%;
+            max-width: ${(100 * value.xl) / 12}%;
+          `
+        : '',
     });
   }}
     
@@ -96,31 +111,31 @@ const Grid = {
             `;
     }
     return breakpointsMedia({
-      ...(offset.xs && {
-        xs: css`
-                    margin-left: ${(100 * offset.xs) / 12}%;
-                `,
-      }),
-      ...(offset.sm && {
-        sm: css`
-                    margin-left: ${(100 * offset.sm) / 12}%;
-                `,
-      }),
-      ...(offset.md && {
-        md: css`
-                    margin-left: ${(100 * offset.md) / 12}%;
-                `,
-      }),
-      ...(offset.lg && {
-        lg: css`
-                    margin-left: ${(100 * offset.lg) / 12}%;
-                `,
-      }),
-      ...(offset.xl && {
-        xl: css`
-                    margin-left: ${(100 * offset.xl) / 12}%;
-                `,
-      }),
+      xs: offset?.xs
+        ? css`
+            margin-left: ${(100 * offset.xs) / 12}%;
+          `
+        : '',
+      sm: offset?.sm
+        ? css`
+            margin-left: ${(100 * offset.sm) / 12}%;
+          `
+        : '',
+      md: offset?.md
+        ? css`
+            margin-left: ${(100 * offset.md) / 12}%;
+          `
+        : '',
+      lg: offset?.lg
+        ? css`
+            margin-left: ${(100 * offset.lg) / 12}%;
+          `
+        : '',
+      xl: offset?.xl
+        ? css`
+            margin-left: ${(100 * offset.xl) / 12}%;
+          `
+        : '',
     });
   }}
 
@@ -128,6 +143,7 @@ const Grid = {
     ${convertPropsToStyle('alignItems')}
     ${convertPropsToStyle('justifyContent')}
     ${convertPropsToStyle('flexDirection')}
+    ${convertPropsToStyle('paddingRight')}
     `,
 };
 
