@@ -126,6 +126,7 @@ const FormContent = () => {
       <Box
         display="flex"
         justifyContent="center"
+        height="205px"
       >
         <Lottie
           width="150px"
