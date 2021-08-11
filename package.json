@@ -8,6 +8,7 @@
     "build:test": "next lint && next build"
   },
   "dependencies": {
+    "@crello/react-lottie": "^0.0.11",
     "framer-motion": "^4.1.17",
     "lodash": "^4.17.21",
     "next": "latest",
