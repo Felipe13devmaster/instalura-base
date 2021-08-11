@@ -9,7 +9,7 @@ import Modal from '../src/components/commons/Modal';
 import FormCadastro from '../src/components/commons/FormCadastro';
 
 const Home = () => { // os parenteses aqui são opcionais, é so pra ficar mais organizado
-  const [isModalOpen, setModalState] = React.useState(true);
+  const [isModalOpen, setModalState] = React.useState(false);
 
   return (
     <Box // este estilo joga o footer pra baixo
