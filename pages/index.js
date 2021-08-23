@@ -31,7 +31,9 @@ const Home = () => { // os parenteses aqui são opcionais, é so pra ficar mais 
           <FormCadastro propsDoModal={propsDoModal} />
         )}
       </Modal>
-      <Menu />
+      <Menu
+        onCadastrarClick={() => setModalState(true)}
+      />
 
       <Grid.Container marginTop={{ xs: '32px', md: '75px' }}>
         <Grid.Row>

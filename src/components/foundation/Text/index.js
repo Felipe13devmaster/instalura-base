@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import get from 'lodash/get';
 import convertPropsToStyle from '../../../theme/utils/convertPropsToStyle';
 import breakpointsMedia from '../../../theme/utils/breakpointsMedia';
+import Link from '../../commons/Link';
 
 export const TextStyleVariantsMap = {
   paragraph1: css`
@@ -44,8 +45,22 @@ const TextBase = styled.span`
 
 export default function Text({
   // eslint-disable-next-line react/prop-types
-  tag, variant, children, ...props
+  tag, variant, children, href, ...props
 }) { // deve suportar as tags de texto p, h"s e span
+  if (href) {
+    return (
+      <TextBase
+        as={Link}
+        href={href}
+        variant={variant}
+      // eslint-disable-next-line react/jsx-props-no-spreading
+        {...props}
+      >
+        {children}
+      </TextBase>
+    );
+  }
+
   return (
     <TextBase
       as={tag}
@@ -62,6 +77,7 @@ export default function Text({
 Text.propTypes = {
   tag: PropTypes.string, // quando tem valor default n precida do isRequired
   variant: PropTypes.string,
+  href: PropTypes.string,
   children: PropTypes.node,
 };
 
@@ -69,4 +85,5 @@ Text.defaultProps = { // Aqui vc deixa explicito o comportamento caso text não 
   tag: 'span',
   variant: 'paragraph1',
   children: null,
+  href: '',
 };
