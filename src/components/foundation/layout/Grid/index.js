@@ -42,6 +42,9 @@ const Grid = {
         ${convertPropsToStyle('flex')}
         ${convertPropsToStyle('marginLeft')}
         ${convertPropsToStyle('marginRight')}
+        ${convertPropsToStyle('marginTop')}
+        ${convertPropsToStyle('marginBottom')}
+        ${convertPropsToStyle('flexDirection')}
         ${convertPropsToStyle('justifyContent')}
       `,
   Col: styled.div`
@@ -144,6 +147,7 @@ const Grid = {
     ${convertPropsToStyle('justifyContent')}
     ${convertPropsToStyle('flexDirection')}
     ${convertPropsToStyle('paddingRight')}
+    ${convertPropsToStyle('order')}
     `,
 };
 

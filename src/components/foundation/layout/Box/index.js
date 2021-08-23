@@ -15,6 +15,14 @@ const Box = styled.div`
   ${convertPropsToStyle('boxShadow')}
   ${convertPropsToStyle('padding')}
   ${convertPropsToStyle('height')}
+  ${convertPropsToStyle('width')}
+  ${convertPropsToStyle('listStyle')}
+  ${convertPropsToStyle('margin')}
+  ${convertPropsToStyle('marginLeft')}
+  ${convertPropsToStyle('marginTop')}
+  ${convertPropsToStyle('marginBottom')}
+  ${convertPropsToStyle('marginRight')}
+  ${({ theme, borderRadiusTheme }) => borderRadiusTheme && `border-radius: ${theme.borderRadius}`};
   ${breakpointsMedia({
     xs: css`
             height: 50%
