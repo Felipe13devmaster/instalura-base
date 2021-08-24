@@ -1,40 +1,18 @@
 import React from 'react';
-import Menu from '../src/components/commons/Menu';
-import Footer from '../src/components/commons/Footer';
 import Text from '../src/components/foundation/Text';
 import Button from '../src/components/commons/Button';
 import Grid from '../src/components/foundation/layout/Grid';
+import WebsitePageWrapper, { WebsitePageContext } from '../src/components/wrappers/WebsitePage';
 import Box from '../src/components/foundation/layout/Box';
-import Modal from '../src/components/commons/Modal';
-import FormCadastro from '../src/components/commons/FormCadastro';
 
-const Home = () => { // os parenteses aqui são opcionais, é so pra ficar mais organizado
-  const [isModalOpen, setModalState] = React.useState(false);
-
+const HomeScreen = () => {
+  const websitePageContext = React.useContext(WebsitePageContext);
   return (
-    <Box // este estilo joga o footer pra baixo
-      flex="1"
+    <Box
       display="flex"
-      flexWrap="wrap"
+      flex="1"
       flexDirection="column"
-      justifyContent="space-between"
-      backgroundImage="url(/images/bubbles.svg)"
-      backgroundRepeat="no-repeat"
-      backgroundPosition="bottom right"
     >
-      {/* isModalOpen && <Modal />  Verdadeiro && <Mostra o que ta aqui /> */}
-      <Modal
-        isOpen={isModalOpen}
-        onClose={() => setModalState(false)}
-      >
-        {(propsDoModal) => (
-          <FormCadastro propsDoModal={propsDoModal} />
-        )}
-      </Modal>
-      <Menu
-        onCadastrarClick={() => setModalState(true)}
-      />
-
       <Grid.Container marginTop={{ xs: '32px', md: '75px' }}>
         <Grid.Row>
           <Grid.Col
@@ -77,8 +55,8 @@ const Home = () => { // os parenteses aqui são opcionais, é so pra ficar mais 
               }}
               display="block"
               onClick={() => {
-                // isModalOpen = true;
-                setModalState(!isModalOpen);
+              // isModalOpen = true;
+                websitePageContext.toggleModalCadastro();// state sendo atribuido
               }}
             >
               Cadastrar
@@ -96,10 +74,26 @@ const Home = () => { // os parenteses aqui são opcionais, é so pra ficar mais 
           </Grid.Col>
         </Grid.Row>
       </Grid.Container>
-
-      <Footer />
     </Box>
   );
 };
+
+const Home = () => (
+  <WebsitePageWrapper
+    seoProps={{
+      headTitle: 'Home',
+    }}
+    pageBoxProps={{
+      backgroundImage: 'url(/images/bubbles.svg)',
+      backgroundRepeat: 'no-repeat',
+      backgroundPosition: 'bottom right',
+    }}
+    menuProps={{
+      display: true,
+    }}
+  >
+    <HomeScreen />
+  </WebsitePageWrapper>
+);
 
 export default Home;
