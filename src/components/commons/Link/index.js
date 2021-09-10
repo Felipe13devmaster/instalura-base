@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import NextLink from 'next/link';
 import styled from 'styled-components';
 import get from 'lodash/get';
+import convertPropsToStyle from '../../../theme/utils/convertPropsToStyle';
 
 const StyledLink = styled.a`
   color: inherit;
@@ -17,6 +18,9 @@ const StyledLink = styled.a`
   &:focus {
     opacity: .5;
   }
+
+  ${convertPropsToStyle('marginBottom')}
+  ${convertPropsToStyle('alignSelf')}
 `;
 
 const Link = ({ href, children, ...props }) => (
