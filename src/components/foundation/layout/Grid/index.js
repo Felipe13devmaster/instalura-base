@@ -33,6 +33,9 @@ const Grid = {
   })}
 
         ${convertPropsToStyle('marginTop')}
+        ${convertPropsToStyle('display')}
+        ${convertPropsToStyle('flex')}
+        ${convertPropsToStyle('alignItems')}
   `,
   Row: styled.div`
         display: flex;
