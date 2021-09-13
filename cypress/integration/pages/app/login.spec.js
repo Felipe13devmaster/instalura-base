@@ -4,10 +4,19 @@
 describe('/pages/app/login', () => {
   // it === teste
   it('preencha os campos e vá para a página /app/profile', () => {
+    cy.intercept('https://instalura-api-git-master-omariosouto.vercel.app/api/login')// intercepta a requisição para o endpoint informado.
+      .as('userLogin');
     cy.visit('/app/login/');// acessa a página
-    cy.get('#formCadastro input[name="usuario"]').type('Felipe');// preenche o campo selecionado
-    cy.get('#formCadastro input[name="senha"]').type('1234');// preenche o campo selecionado
+    cy.get('#formCadastro input[name="usuario"]').type('omariosouto');// preenche o campo selecionado
+    cy.get('#formCadastro input[name="senha"]').type('senhasegura');// preenche o campo selecionado
     cy.get('#formCadastro button[type="submit"]').click();// clica no botão selecionado
-    cy.url().should('incude', '/app./profile');// verifica se teve o comportamento esperado(Ir pra essa url neste exemplo).
+    cy.url().should('include', '/app/profile');// verifica se teve o comportamento esperado(Ir pra essa url neste exemplo).
+    cy.wait('@userLogin')// Temos o token salvo?
+      .then((intercept) => {
+        const { token } = intercept.response.body.data;// pega o token interceptado
+        cy.getCookie('APP_TOKEN')// pega o cookie salvo pelo nome
+          .should('exist')// verifica se existe um salvo com o nome informado
+          .should('have.property', 'value', token); // valida se o valor desse token salvo no cookie é o mesmo do cookie interceptado
+      });
   });
 });

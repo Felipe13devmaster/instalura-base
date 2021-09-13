@@ -1,3 +1,5 @@
+import { destroyCookie, setCookie } from 'nookies';
+
 async function HttpClient(url, { headers, body, ...options }) {
   return fetch(url, {
     headers: {
@@ -17,14 +19,28 @@ async function HttpClient(url, { headers, body, ...options }) {
 
 const loginService = {
   async login({ username, password }) {
-    return HttpClient('https://instalura-api.omariosouto.vercel.app/api/login', {
+    return HttpClient('https://instalura-api-git-master-omariosouto.vercel.app/api/login', {
       method: 'POST',
       body: {
         username,
         password,
       },
     })
-      .then((respostaCovertida) => respostaCovertida);
+      .then((respostaConvertida) => {
+        // console.log(respostaConvertida);
+        const DAY_IN_SECONDS = 86400;
+        const { token } = respostaConvertida.data;
+        setCookie(null, 'APP_TOKEN', token, {
+          path: '/', // '/' indica que qualquer pagina apartir da raiz tera aceeso a este cookie
+          maxAge: DAY_IN_SECONDS * 7,
+        });// Esse null passamos quando cahamamos essa função do lado do client
+        return {
+          token,
+        };
+      });
+  },
+  logout() {
+    destroyCookie(null, 'APP_TOKEN');
   },
 };
 
