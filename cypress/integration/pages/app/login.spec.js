@@ -1,4 +1,7 @@
 /// <reference types="cypress" />
+
+import LoginScreenPageObject from '../../../../src/components/screens/app/LoginScreen/LoginScreen.pageObject.js';
+
 // Ajuda no autocomplete do cypress
 
 describe('/pages/app/login', () => {
@@ -6,11 +9,15 @@ describe('/pages/app/login', () => {
   it('preencha os campos e vá para a página /app/profile', () => {
     cy.intercept('https://instalura-api-git-master-omariosouto.vercel.app/api/login')// intercepta a requisição para o endpoint informado.
       .as('userLogin');
-    cy.visit('/app/login/');// acessa a página
-    cy.get('#formCadastro input[name="usuario"]').type('omariosouto');// preenche o campo selecionado
-    cy.get('#formCadastro input[name="senha"]').type('senhasegura');// preenche o campo selecionado
-    cy.get('#formCadastro button[type="submit"]').click();// clica no botão selecionado
+
+    const loginScreen = new LoginScreenPageObject(cy);
+
+    loginScreen
+      .preencherCamposDoFormulario({ user: 'omariosouto', password: 'senhasegura' })
+      .submeterLoginForm();
+
     cy.url().should('include', '/app/profile');// verifica se teve o comportamento esperado(Ir pra essa url neste exemplo).
+
     cy.wait('@userLogin')// Temos o token salvo?
       .then((intercept) => {
         const { token } = intercept.response.body.data;// pega o token interceptado
