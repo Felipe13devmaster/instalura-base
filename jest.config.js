@@ -9,4 +9,5 @@ module.exports = { // preparado para ler os modulos da aplicação.
     '<rootDir>/cypress/',
     '<rootDir>/dist/',
   ],
+  testEnvironment: 'jsdom',
 };
