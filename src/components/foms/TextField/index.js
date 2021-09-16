@@ -21,24 +21,43 @@ const TextField = ({
   name,
   onChange,
   value,
+  error,
+  isTouched,
   ...props
-}) => (
-
-  <InputWrapper>
-    <Input
-      type="text"
-      placeholder={placeholder}
-      name={name}
-      onChange={onChange}
-      value={value}
-      {...props}
-    />
-  </InputWrapper>
-);
+}) => {
+  const hasError = Boolean(error);
+  const isFieldInvalid = hasError && isTouched;
+  return (
+    <InputWrapper>
+      <Input
+        type="text"
+        placeholder={placeholder}
+        name={name}
+        onChange={onChange}
+        value={value}
+        {...props}
+      />
+      {isFieldInvalid && (
+        <Text
+          variant="smallestException"
+          color="error.main"
+          role="alert"
+        >
+          {error}
+        </Text>
+      )}
+    </InputWrapper>
+  );
+};
 
 Input.defaultProps = {
   tag: 'input',
   variant: 'paragraph1',
+};
+
+TextField.defaultProps = {
+  error: '',
+  isTouched: false,
 };
 
 TextField.propTypes = {
@@ -46,6 +65,8 @@ TextField.propTypes = {
   name: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,
   value: PropTypes.string.isRequired,
+  error: PropTypes.string,
+  isTouched: PropTypes.bool,
 };
 
 export default TextField;
