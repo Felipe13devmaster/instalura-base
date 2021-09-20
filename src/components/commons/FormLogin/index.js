@@ -1,3 +1,5 @@
+/* eslint-disable react/prop-types */
+/* eslint-disable no-console */
 import React from 'react';
 import { useRouter } from 'next/router';
 import * as yup from 'yup';// Essa lib vai fazer as validações do formulário
@@ -17,7 +19,7 @@ const loginSchema = yup.object().shape({
     .min(8, 'Sua senha precisa ter ao menos 8 caracteres'),
 });
 
-const LoginForm = () => {
+const LoginForm = ({ onSubmit }) => {
   const router = useRouter();
   const initialValues = {
     usuario: '',
@@ -26,13 +28,16 @@ const LoginForm = () => {
   const form = useForm({
     initialValues,
     onSubmit: (values) => {
+      form.setIsFormDisabled(true);// desabilita o botão
       loginService.login({
         username: values.usuario,
         password: values.senha,
       })
         .then(() => {
           router.push('/app/profile');
-        });
+        })
+        .catch((err) => console.log(err))
+        .finally(() => form.setIsFormDisabled(false));
     },
     validateSchema: (values) => loginSchema.validate(values, {
       abortEarly: false, // Isso é pra mostrar todos os erros
@@ -40,7 +45,7 @@ const LoginForm = () => {
   });
 
   return (
-    <form id="formCadastro" onSubmit={form.handleSubmit}>
+    <form id="formCadastro" onSubmit={onSubmit || form.handleSubmit}>
       <TextField
         placeholder="Usuário"
         name="usuario"

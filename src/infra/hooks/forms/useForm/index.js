@@ -6,32 +6,55 @@ export default function useForm({ initialValues, onSubmit, validateSchema }) {
   const [errors, setErrors] = React.useState({});
   const [touched, setTouchedFields] = React.useState({});
 
-  React.useEffect(() => { // Intercepta quando há mudanças de valores(values) no formulário
-    validateSchema(values)
-      .then(() => {
-        // console.log(result);
-        setIsFormDisabled(false);
-        setErrors({});// Aqui lista de erros volta a ficar vazia
-      })
-      .catch((err) => {
-        const formatedErrors = err.inner.reduce((errorObjettAcc, currentError) => {
-          const fieldName = currentError.path;
-          const errorMessage = currentError.message;
-          // console.log(currentError);
-          return {
-            ...errorObjettAcc,
-            [fieldName]: errorMessage,
-          };
-        }, {});
-        setIsFormDisabled(true);
-        setErrors(formatedErrors);
-      });
+  async function validateValues(currentValues) {
+    try {
+      await validateSchema(currentValues);
+      setErrors({});
+      setIsFormDisabled(false);
+    } catch (err) {
+      const formatedErrors = err.inner.reduce((errorObjectAcc, currentError) => {
+        const fieldName = currentError.path;
+        const errorMessage = currentError.message;
+        return {
+          ...errorObjectAcc,
+          [fieldName]: errorMessage,
+        };
+      }, {});
+      setErrors(formatedErrors);
+      setIsFormDisabled(true);
+    }
+  }
 
-    //   if (values.usuario.length > 0) setIsFormDisabled(false);
-    //   else setIsFormDisabled(true);
-
-    //   console.log(values);
+  React.useEffect(() => {
+    validateValues(values);
   }, [values]);
+
+  // React.useEffect(() => { // Intercepta quando há mudanças de valores(values) no formulário
+  //   validateSchema(values)
+  //     .then(() => {
+  //       // console.log(result);
+  //       setIsFormDisabled(false);
+  //       setErrors({});// Aqui lista de erros volta a ficar vazia
+  //     })
+  //     .catch((err) => {
+  //       const formatedErrors = err.inner.reduce((errorObjettAcc, currentError) => {
+  //         const fieldName = currentError.path;
+  //         const errorMessage = currentError.message;
+  //         // console.log(currentError);
+  //         return {
+  //           ...errorObjettAcc,
+  //           [fieldName]: errorMessage,
+  //         };
+  //       }, {});
+  //       setIsFormDisabled(true);
+  //       setErrors(formatedErrors);
+  //     });
+
+  //   //   if (values.usuario.length > 0) setIsFormDisabled(false);
+  //   //   else setIsFormDisabled(true);
+
+  //   //   console.log(values);
+  // }, [values]);
 
   return {
     values,
@@ -48,6 +71,7 @@ export default function useForm({ initialValues, onSubmit, validateSchema }) {
     },
     // Validação do form
     isFormDisabled,
+    setIsFormDisabled,
     errors,
     touched,
     handleBlur(event) {
