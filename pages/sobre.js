@@ -1,9 +1,35 @@
-import React from 'react';
+/* eslint-disable max-len */
+import { GraphQLClient, gql } from 'graphql-request';
+import AboutScreen from '../src/components/screens/AboutScreen';
+import websitePageHOC from '../src/components/wrappers/WebsitePage/hoc';
 
-export default function Page404() {
-  return (
-    <div>
-      Página 404
-    </div>
-  );
+export async function getStaticProps() {
+  // const TOKEN = '05cd685425fe7b7dd7b879605e5e7d';// isso é errado, tokens devem ficar nas variaveis de ambiente
+  const TOKEN = process.env.DATO_CMS_TOKEN;
+  const DatoCMSURL = 'https://graphql.datocms.com/';
+
+  const client = new GraphQLClient(DatoCMSURL, {
+    headers: {
+      Authorization: `Bearer ${TOKEN}`,
+    },
+  });
+
+  const query = gql`
+    query {
+      pageSobre {
+        pageTitle
+        pageDescription
+      }
+    }
+  `;
+
+  const messages = await client.request(query);
+
+  return {
+    props: {
+      messages,
+    },
+  };
 }
+
+export default websitePageHOC(AboutScreen);
