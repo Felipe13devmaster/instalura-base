@@ -4,6 +4,8 @@ import Box from '../../foundation/layout/Box';
 import Grid from '../../foundation/layout/Grid';
 import Text from '../../foundation/Text';
 
+export { getContent } from './getContent';// Permite importar getContent em outro arquivo apartir do import de aboutScreen
+
 export default function AboutScreen({ messages }) {
   return (
     <Box
